@@ -20,31 +20,36 @@ const Detail = () => {
       .then((data) => setProd(data))
       .finally(() => setLoading(false));
   }, [prod_id]);
+
   return prod != null && !loading ? (
-    <div className="flex flex-col border-4 mx-64 my-16 p-4 rounded">
-      <div className="flex justify-between mb-6 mx-4">
-        <div>
-          <h2>
-            {prod.brand} {prod.title}
-          </h2>
-          <p>{prod.category}</p>
+    <div className="flex flex-col px-64 py-16 p-4 min-h-screen bg-slate-500">
+      <div className="bg-white rounded px-4 py-4">
+        <div className="flex justify-between mb-6 mx-4 ">
+          <div>
+            <h2>
+              {prod.brand} {prod.title}
+            </h2>
+            <p>{prod.category}</p>
+          </div>
+          <div>
+            <div>{prod.price}$</div>
+            <div>stock: {prod.stock}</div>
+          </div>
         </div>
-        <div>
-          <div>{prod.price}$</div>
-          <div>stock: {prod.stock}</div>
+        <div className="flex ">
+          <div className="flex flex-wrap flex-9 border-2 rounded justify-center items-center">
+            {prod.images.map((img) => (
+              <img className="w-64 m-1" src={img} alt="" />
+            ))}
+          </div>
+          <div className="flex-3 mx-4">{prod.description}</div>
         </div>
-      </div>
-      <div className="flex ">
-        <div className="flex flex-wrap flex-9 border-2 rounded justify-center items-center">
-          {prod.images.map((img) => (
-            <img className="w-64 m-1" src={img} alt="" />
-          ))}
-        </div>
-        <div className="flex-3 mx-4">{prod.description}</div>
       </div>
     </div>
   ) : (
-    <Loading />
+    <div className="text-center mt-24">
+      <Loading />
+    </div>
   );
 };
 
