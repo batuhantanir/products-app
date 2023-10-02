@@ -11,8 +11,6 @@ const Detail = () => {
   const [prod, setProd] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(prod);
-
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_BASE_ENDPOINT}/products/${prod_id}`)
@@ -38,8 +36,8 @@ const Detail = () => {
         </div>
         <div className="flex ">
           <div className="flex flex-wrap flex-9 border-2 rounded justify-center items-center">
-            {prod.images.map((img) => (
-              <img className="w-64 m-1" src={img} alt="" />
+            {prod.images.map((img, idx) => (
+              <img key={idx} className="w-64 m-1" src={img} alt="" />
             ))}
           </div>
           <div className="flex-3 mx-4">{prod.description}</div>
